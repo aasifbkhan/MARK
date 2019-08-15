@@ -3,15 +3,15 @@
 
 using namespace std;
 
-
-int main(int argc, char* argv[])
+int main()
 {
 	char ch[1000];
+	int a;
 	ISpVoice* pVoice = NULL;
 
 	if (FAILED(::CoInitialize(NULL)))
 		return FALSE;
-
+	
 	HRESULT hr = CoCreateInstance(CLSID_SpVoice, NULL, CLSCTX_ALL, IID_ISpVoice, (void**)& pVoice);
 	if (SUCCEEDED(hr))
 	{
@@ -23,13 +23,22 @@ int main(int argc, char* argv[])
 			cout << "\n-->> What can i help you?" << endl;
 			hr = pVoice->Speak(L"What can i help you?", SPF_IS_XML, NULL);
 			cin >> ch;
-
-
-
-
-
-
-
+			if (ch == "image detection" || ch == "image processing" || ch == "object detection" || ch=="video detection") {
+				hr = pVoice->Speak(L"Select anyone from the video.", SPF_IS_XML, NULL);
+				cout << "\n 1. Object Detection Using Image.\n 2. Object Detection Using Video."<<endl;
+				cin >> a;
+				switch (a)
+				{
+				case 1:
+					cout << "You are in case one";
+					break;
+				case 2:
+					cout << "you are in case two";
+					break;
+				default:
+					break;
+				}
+			}
 			pVoice->Release();
 			pVoice = NULL;
 		} while (ch=="stop");
