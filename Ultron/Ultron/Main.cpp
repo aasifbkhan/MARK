@@ -42,15 +42,24 @@ int main()
 			faceCascade.load(fcp);
 			vector<Rect> faces;
 			faceCascade.detectMultiScale(image, faces);
+			for (size_t i = 0; i < faces.size(); i++)
+			{
+				//int x1 = faces[i].x;
+				//int y1 = faces[i].y;
+				//int x2 = faces[i].x + faces[i].width;
+				//int y2 = faces[i].y + faces[i].height;
+				Point center(faces[i].x + faces[i].width / 2, faces[i].y + faces[i].height / 2);
+				ellipse(image, center, Size(faces[i].width / 2, faces[i].height / 2), 0, 0, 360, Scalar(255, 0, 255), 4);
+				//rectangle(image, center, Size(faces[i].width / 2, faces[i].height / 2), 1, 8, 0);
+
+			}
 
 
 
 
 
 
-
-
-			namedWindow("image", WINDOW_NORMAL);
+			namedWindow("image",WINDOW_NORMAL);
 			imshow("image", image);
 			waitKey(0);
 
